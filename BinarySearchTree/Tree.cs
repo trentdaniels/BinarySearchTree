@@ -76,9 +76,7 @@ namespace BinarySearchTree
             else
             {
                 Console.WriteLine("Could not find this value in the tree.");
-                Console.WriteLine("Please choose a new value to search for.");
-                int newSearchValue = int.Parse(Console.ReadLine());
-                return SearchTree(newSearchValue);
+                return false;
             }
 
         }
