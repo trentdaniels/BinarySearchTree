@@ -3,12 +3,12 @@ namespace BinarySearchTree
 {
     public class Tree
     {
-        private Node node;
+        private Node rootNode;
         private Random random;
         public Tree()
         {
             random = new Random();
-            node = new Node(100);
+            rootNode = new Node(100);
         }
 
 
@@ -18,7 +18,7 @@ namespace BinarySearchTree
 
             int randomInfo = random.Next(0, 200);
             Node newNode = new Node(randomInfo);
-            nodeToCheck = node;
+            nodeToCheck = rootNode;
             while (nodeToCheck.rightChild != null || nodeToCheck.leftChild != null)
             {
                 if (newNode.info >= nodeToCheck.info && nodeToCheck.rightChild != null )
@@ -48,7 +48,7 @@ namespace BinarySearchTree
 
         public bool SearchTree(int infoValue)
         {
-            Node nodeToCheck = node;
+            Node nodeToCheck = rootNode;
             Console.WriteLine($"{nodeToCheck.info}: Root Node");
             while (nodeToCheck.rightChild != null || nodeToCheck.leftChild != null)
             {
