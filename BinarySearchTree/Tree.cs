@@ -19,15 +19,15 @@ namespace BinarySearchTree
             int randomInfo = random.Next(0, 200);
             Node newNode = new Node(randomInfo);
             nodeToCheck = rootNode;
-            while (nodeToCheck.rightChild != null || nodeToCheck.leftChild != null)
+            while (CheckedNodeHasAChild(nodeToCheck))
             {
-                if (newNode.info >= nodeToCheck.info && nodeToCheck.rightChild != null )
+                if (newNode.Info >= nodeToCheck.Info && nodeToCheck.RightChild != null)
                 {
-                    nodeToCheck = nodeToCheck.rightChild;
+                    nodeToCheck = nodeToCheck.RightChild;
                 }
-                else if (newNode.info < nodeToCheck.info && nodeToCheck.leftChild != null)
+                else if (newNode.Info < nodeToCheck.Info && nodeToCheck.LeftChild != null)
                 {
-                    nodeToCheck = nodeToCheck.leftChild;
+                    nodeToCheck = nodeToCheck.LeftChild;
                 }
                 else
                 {
@@ -35,32 +35,33 @@ namespace BinarySearchTree
                 }
             }
 
-            if (newNode.info >= nodeToCheck.info && nodeToCheck.rightChild == null)
+            if (newNode.Info >= nodeToCheck.Info && nodeToCheck.RightChild == null)
             {
-                nodeToCheck.rightChild = newNode;
+                nodeToCheck.RightChild = newNode;
             }
 
-            else if (newNode.info < nodeToCheck.info && nodeToCheck.leftChild == null)
+            else if (newNode.Info < nodeToCheck.Info && nodeToCheck.LeftChild == null)
             {
-                nodeToCheck.leftChild = newNode;
+                nodeToCheck.LeftChild = newNode;
             }
         }
 
         public bool SearchTree(int infoValue)
         {
             Node nodeToCheck = rootNode;
-            Console.WriteLine($"{nodeToCheck.info}: Root Node");
-            while (nodeToCheck.rightChild != null || nodeToCheck.leftChild != null)
+            Console.WriteLine($"Search value: {infoValue}");
+            Console.WriteLine($"Root : {nodeToCheck.Info}");
+            while (CheckedNodeHasAChild(nodeToCheck))
             {
-                if (infoValue >= nodeToCheck.info && nodeToCheck.rightChild != null)
+                if (infoValue >= nodeToCheck.Info && nodeToCheck.RightChild != null)
                 {
-                    nodeToCheck = nodeToCheck.rightChild;
-                    Console.WriteLine($"{nodeToCheck.info}: Went right ->");
+                    nodeToCheck = nodeToCheck.RightChild;
+                    Console.WriteLine($"-> : {nodeToCheck.Info}");
                 }
-                else if (infoValue < nodeToCheck.info && nodeToCheck.leftChild != null)
+                else if (infoValue < nodeToCheck.Info && nodeToCheck.LeftChild != null)
                 {
-                    nodeToCheck = nodeToCheck.leftChild;
-                    Console.WriteLine($"{nodeToCheck.info}: <- Went left");
+                    nodeToCheck = nodeToCheck.LeftChild;
+                    Console.WriteLine($"<- : {nodeToCheck.Info}");
                 }
                 else
                 {
@@ -68,17 +69,18 @@ namespace BinarySearchTree
                 }
             }
 
-            if (infoValue ==  nodeToCheck.info)
+            if (infoValue == nodeToCheck.Info)
             {
-                Console.WriteLine($"Found the node at {nodeToCheck.info}!");
+                Console.WriteLine($"Found the node at {nodeToCheck.Info}!");
                 return true;
             }
-            else
-            {
-                Console.WriteLine("Could not find this value in the tree.");
-                return false;
-            }
+            Console.WriteLine($"Could not find {infoValue} in the tree.");
+            return false;
+        }
 
+        private bool CheckedNodeHasAChild(Node nodeToCheck)
+        {
+            return nodeToCheck.RightChild != null || nodeToCheck.LeftChild != null;
         }
     }
 }
